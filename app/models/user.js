@@ -8,6 +8,7 @@ var sjcl = require('sjcl')
 var async = require('async');
 var bn = require("bignumber.js");
 var Sequelize = require('sequelize');
+var pgHstore  = require('pg-hstore');
 
 var User = db.define('user', {
   id: { 
@@ -228,7 +229,26 @@ var User = db.define('user', {
       });
     },
     updateUser: function(opts, fn) {
-      this.updateAttributes(opts).success(fn);
+
+      // if there's already an hstore data entry, we should extend it instead of replacing
+      if (opts.data && this.data) {
+        
+        var callback = function(result) {
+
+          // copy over the data into the existing hstore data
+          for (var key in opts.data) {
+            result[key] = opts.data[key];
+          }
+
+          // execute the update with the extended payload
+          opts.data = result;
+          this.updateAttributes(opts).success(fn);
+        };
+
+        pgHstore.parse(this.data, callback.bind(this));
+      } else {
+        this.updateAttributes(opts).success(fn);
+      }
     }
   },
   classMethods: {

@@ -1,30 +1,35 @@
 {
   "name": "ripple-gateway",
   "version": "0.7.0",
-  "scripts": { "test": "mocha test/integration/" },    
-  "bin" : { "gateway" : "./bin/gateway" },
-  "dependencies" : {
+  "scripts": {
+    "test": "mocha test/integration/"
+  },
+  "bin": {
+    "gateway": "./bin/gateway"
+  },
+  "dependencies": {
     "express": "3.x",
     "pg": "",
     "sequelize": "",
     "sequelize-postgres": "",
-    "db-migrate":"",
+    "db-migrate": "",
     "express-validator": "",
-		"validator": "~2.0",
+    "validator": "~2.0",
     "bignumber.js": "1.3.0",
     "express-authorization": "0.1.1",
-    "passport":"",
-    "passport-http":"",
-    "sjcl":"1.0.0",
+    "passport": "",
+    "passport-http": "",
+    "sjcl": "1.0.0",
     "ripple-lib": "",
     "request": "",
     "async": "",
-    "nconf":"~0.6",
-    "commander":"2.1.0",
-    "ripple-wallet":""
+    "nconf": "~0.6",
+    "commander": "2.1.0",
+    "ripple-wallet": "",
+    "pg-hstore": "~1.0.4"
   },
   "devDependencies": {
     "mocha": "~1.14.0",
-		"node-uuid":""
+    "node-uuid": ""
   }
 }
